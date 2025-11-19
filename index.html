@@ -5,135 +5,304 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giulio Di Martino - Portfolio</title>
     <style>
+        :root {
+            --bg: #f6f7fb;
+            --surface: #ffffff;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --primary: #2563eb; /* blue-600 */
+            --primary-700: #1d4ed8;
+            --ring: rgba(37,99,235,0.25);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0b1220;
+                --surface: #0f172a;
+                --text: #e5e7eb;
+                --muted: #94a3b8;
+                --border: #1f2a44;
+                --primary: #3b82f6; /* blue-500 */
+                --primary-700: #2563eb;
+                --ring: rgba(59,130,246,0.35);
+            }
+        }
+
+        * { box-sizing: border-box; }
+        html, body { height: 100%; }
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: #f5f5f5;
-            color: #333;
+            font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            background: radial-gradient(1000px 500px at 50% -100px, rgba(37,99,235,0.08), transparent 60%), var(--bg);
+            color: var(--text);
             text-align: center;
+            line-height: 1.6;
         }
+
+        .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
         header {
-            background: #2c3e50;
-            color: white;
-            padding: 60px 0 40px 0;
-            box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+            color: var(--text);
+            padding: 72px 0 48px 0;
+            background: linear-gradient(180deg, rgba(37,99,235,0.08), rgba(37,99,235,0.0));
+            border-bottom: 1px solid var(--border);
         }
+        .header-inner { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
         header h1 {
             margin: 0;
-            font-size: 2.5em;
+            font-size: 2.8em;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--text), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         header p {
-            font-size: 1.2em;
-            margin-top: 10px;
+            font-size: 1.15em;
+            margin-top: 12px;
+            color: var(--muted);
         }
+
         .buttons {
-            margin-top: 20px;
+            margin-top: 24px;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 14px;
         }
         .button {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: #3498db;
-            color: white;
+            gap: 10px;
+            padding: 12px 18px;
+            background: var(--primary);
+            color: #fff;
             text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: 500;
-            box-shadow: 0 2px 8px rgba(44,62,80,0.08);
-            transition: background 0.3s, transform 0.2s;
+            border-radius: 999px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            box-shadow: 0 8px 20px rgba(37,99,235,0.18), 0 1px 0 rgba(0,0,0,0.06) inset;
+            transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+            border: 1px solid transparent;
         }
-        .button:hover {
-            background: #2980b9;
-            transform: translateY(-2px) scale(1.04);
-        }
-        .button svg {
-            width: 22px;
-            height: 22px;
-            fill: white;
-        }
-        
-        footer {
-            margin-top: 50px;
-            padding: 20px;
-            background: #ddd;
-            font-size: 0.9em;
-        }
-        /* Timeline modern style */
+        .button:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(37,99,235,0.24); background: var(--primary-700); }
+        .button:focus-visible { outline: none; box-shadow: 0 0 0 6px var(--ring); }
+        .button svg { width: 20px; height: 20px; fill: currentColor; }
+
+        /* Timeline container */
         .cv-timeline {
-            max-width: 800px;
-            margin: 40px auto 0 auto;
+            max-width: 960px;
+            margin: 32px auto 0 auto;
             text-align: left;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 16px rgba(44,62,80,0.08);
-            padding: 32px 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 6px 24px rgba(2,6,23,0.06);
+            padding: 28px 22px;
         }
         .cv-timeline h2 {
-            color: #2c3e50;
-            margin-top: 32px;
-            margin-bottom: 16px;
-            font-size: 1.4em;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 4px;
+            color: var(--text);
+            margin-top: 28px;
+            margin-bottom: 12px;
+            font-size: 1.25em;
+            font-weight: 700;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 6px;
         }
+        .cv-timeline > p { color: var(--muted); }
+        /* Generic section card */
+        .cv-section {
+            max-width: 960px;
+            margin: 32px auto 0 auto;
+            text-align: left;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 6px 24px rgba(2,6,23,0.06);
+            padding: 26px 22px 26px 22px;
+        }
+        .cv-section h2 {
+            margin: 0 0 14px 0;
+            font-size: 1.22em;
+            font-weight: 700;
+            letter-spacing: -.5px;
+            color: var(--text);
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 6px;
+        }
+        .cv-section p, .cv-section ul { color: var(--muted); }
+
         .timeline {
             position: relative;
-            margin-left: 24px;
-            padding-left: 24px;
-            border-left: 2px solid #3498db;
+            margin-left: 16px;
+            padding-left: 22px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(var(--primary), var(--primary-700));
+            opacity: .35;
         }
         .timeline-item {
             position: relative;
-            margin-bottom: 32px;
-            padding-left: 16px;
+            margin-bottom: 26px;
+            padding-left: 6px;
         }
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
+        .timeline-item:last-child { margin-bottom: 0; }
         .timeline-date {
             font-size: 0.95em;
-            color: #3498db;
-            font-weight: 600;
-            margin-bottom: 2px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 4px;
             display: block;
         }
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -32px;
-            top: 8px;
-            width: 16px;
-            height: 16px;
-            background: #3498db;
+            left: -11px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            background: var(--surface);
             border-radius: 50%;
-            border: 3px solid #fff;
-            box-shadow: 0 0 0 2px #3498db33;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 0 4px rgba(37,99,235,0.10);
         }
-        .timeline-item strong {
-            font-size: 1.08em;
-            color: #222;
+        .timeline-item strong { font-size: 1.05em; color: var(--text); }
+        .timeline-item em { color: var(--muted); font-size: 0.98em; font-style: italic; margin-bottom: 6px; display: block; }
+        .timeline-item ul { margin: 8px 0 0 0; padding-left: 20px; }
+        .timeline-item li { margin: 6px 0; }
+
+        footer {
+            margin-top: 50px;
+            padding: 24px;
+            background: transparent;
+            color: var(--muted);
+            font-size: 0.95em;
+            border-top: 1px solid var(--border);
         }
-        .timeline-item em {
-            color: #555;
-            font-size: 0.98em;
-            font-style: italic;
-            margin-bottom: 6px;
-            display: block;
+
+        @media (max-width: 640px) {
+            header h1 { font-size: 2.1em; }
+            .cv-timeline { padding: 22px 16px; border-radius: 14px; }
         }
-        .timeline-item ul {
-            margin: 8px 0 0 0;
-            padding-left: 18px;
+        /* Wingfinder custom section */
+        .wingfinder {
+            max-width: 960px;
+            margin: 42px auto 0 auto;
+            padding: 0;
+            background: radial-gradient(600px 400px at 85% 20%, rgba(37,99,235,0.15), transparent 60%),
+                        linear-gradient(135deg, var(--surface) 0%, var(--surface) 40%, rgba(37,99,235,0.05) 100%);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px -4px rgba(2,6,23,0.12), 0 2px 6px rgba(2,6,23,0.08);
+            overflow: hidden;
+        }
+        .wingfinder-inner { padding: 32px 28px 30px 28px; text-align: left; }
+        .wingfinder-header { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 16px; }
+        .wingfinder-icon {
+            width: 58px; height: 58px; flex-shrink: 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-700));
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 16px rgba(37,99,235,0.35);
+            position: relative;
+        }
+        .wingfinder-icon svg { width: 34px; height: 34px; fill: #fff; }
+        .wingfinder h2 {
+            margin: 0 0 6px 0; font-size: 1.35em; letter-spacing: -0.5px;
+            background: linear-gradient(120deg, var(--text), var(--primary));
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .wingfinder-lead { color: var(--muted); margin: 4px 0 22px 0; max-width: 760px; line-height: 1.5; }
+        .wingfinder-badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 26px 0; }
+        .wingfinder-badges span {
+            background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(37,99,235,0.25));
+            color: var(--primary-700);
+            padding: 6px 14px; font-size: 0.78rem; font-weight: 600; letter-spacing: .5px;
+            border-radius: 999px; position: relative; overflow: hidden;
+            border: 1px solid rgba(37,99,235,0.28);
+        }
+        .wingfinder-badges span::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent 70%); opacity: .55; }
+        .wingfinder-cta { display: flex; justify-content: flex-start; }
+        .wingfinder-cta .button { box-shadow: 0 10px 28px rgba(37,99,235,0.32); }
+        .wingfinder-cta .button:hover { box-shadow: 0 14px 34px rgba(37,99,235,0.38); }
+        .wingfinder-note { margin-top: 18px; font-size: .78rem; color: var(--muted); opacity: .85; }
+        @media (max-width: 720px) {
+            .wingfinder-inner { padding: 28px 20px 26px 20px; }
+            .wingfinder-header { flex-direction: row; }
+            .wingfinder-icon { width: 50px; height: 50px; border-radius: 14px; }
+            .wingfinder-icon svg { width: 28px; height: 28px; }
+            .wingfinder-badges { gap: 8px; }
+        }
+        @media (max-width: 520px) {
+            .wingfinder-header { flex-direction: column; }
+            .wingfinder-cta { justify-content: center; }
+        }
+
+        nav.sidebar-index {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 180px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            box-shadow: 2px 0 12px rgba(37,99,235,0.07);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 40px;
+        }
+        nav.sidebar-index ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+        nav.sidebar-index li {
+            margin-bottom: 18px;
+        }
+        nav.sidebar-index a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 500;
+            padding: 8px 18px;
+            border-radius: 8px;
+            transition: background .18s, color .18s;
+        }
+        nav.sidebar-index a.active {
+            background: var(--primary);
+            color: #fff;
+        }
+        nav.sidebar-index svg {
+            flex-shrink: 0;
+            fill: currentColor;
+        }
+        @media (max-width: 800px) {
+            nav.sidebar-index { display: none; }
+        }
+        body {
+            margin-left: 180px;
         }
     </style>
 </head>
 <body>
 
     <header>
+        <div class="header-inner">
         <h1>Giulio Di Martino</h1>
         <p>Portfolio personale e curriculum online</p>
         <div class="buttons">
@@ -149,17 +318,30 @@
                 <svg viewBox="0 0 24 24"><path d="M6 2c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-12l-6-6h-8zm7 1.5v4.5h4.5l-4.5-4.5zm-7 16.5v-16h7v6h6v10h-13z"/></svg>
                 Scarica CV
             </a>
-            <a class="button" href="https://www.wingfinder.com/result/share/PlSj-L8ZsepsU4FufimHj?lang=it" target="_blank">
-                Wingfinder
-            </a>
+        </div>
         </div>
     </header>
 
-    <section class="cv-timeline">
-        <h2>Professional Profile</h2>
-        <p>Mechanical Engineer with a strong foundation in mechatronics, currently completing a Master’s degree in Mechatronic Engineering. Experienced in autonomous systems, robotics, and control engineering, with hands-on involvement in simulation environments. Passionate about control systems, intelligent mobility, and the seamless integration of mechanical engineering with embedded software for high-performance, automated systems.</p>
+    <nav class="sidebar-index">
+        <ul>
+            <li><a href="#profile" id="nav-profile"><img src="icon/profile.png" alt="Profile" style="width:22px;height:22px;vertical-align:middle;object-fit:contain;background:#fff;border-radius:6px;padding:2px;"> <span>Profile</span></a></li>
+            <li><a href="#experience" id="nav-experience"><img src="icon/experience.png" alt="Experience" style="width:22px;height:22px;vertical-align:middle;object-fit:contain;background:#fff;border-radius:6px;padding:2px;"> <span>Experience</span></a></li>
+            <li><a href="#university-projects" id="nav-university-projects"><img src="icon/project.png" alt="Projects" style="width:22px;height:22px;vertical-align:middle;object-fit:contain;background:#fff;border-radius:6px;padding:2px;"> <span>Projects</span></a></li>
+            <li><a href="#education" id="nav-education"><img src="icon/education.png" alt="Education" style="width:22px;height:22px;vertical-align:middle;object-fit:contain;background:#fff;border-radius:6px;padding:2px;"> <span>Education</span></a></li>
+            <li><a href="#technical-skills" id="nav-technical-skills"><img src="icon/competenze.png" alt="Skills" style="width:22px;height:22px;vertical-align:middle;object-fit:contain;background:#fff;border-radius:6px;padding:2px;"> <span>Skills</span></a></li>
+            <li><a href="#languages" id="nav-languages"><img src="icon/languages.png" alt="Languages" style="width:22px;height:22px;vertical-align:middle;object-fit:contain;background:#fff;border-radius:6px;padding:2px;"> <span>Languages</span></a></li>
+            <li><a href="#soft-skills" id="nav-soft-skills"><img src="icon/soft_skill.png" alt="Soft Skills" style="width:22px;height:22px;vertical-align:middle;object-fit:contain;background:#fff;border-radius:6px;padding:2px;"> <span>Soft Skills</span></a></li>
+        </ul>
+    </nav>
 
-        <h2>Experience</h2>
+    <main>
+    <section class="cv-section" id="profile">
+        <h2><img src="icon/profile.png" alt="Profile" style="width:28px;height:28px;vertical-align:middle;margin-right:8px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;"> Profile</h2>
+        <p>Mechanical Engineer with a strong foundation in mechatronics, currently completing a Master’s degree in Mechatronic Engineering. Experienced in autonomous systems, robotics, and control engineering, with hands-on involvement in simulation environments. Passionate about control systems, intelligent mobility, and the seamless integration of mechanical engineering with embedded software for high-performance, automated systems.</p>
+    </section>
+
+    <section class="cv-timeline" id="experience">
+        <h2><img src="icon/experience.png" alt="Experience" style="width:28px;height:28px;vertical-align:middle;margin-right:8px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;"> Experience</h2>
         <div class="timeline">
             <div class="timeline-item">
                 <span class="timeline-date">Mar 2025 – Oct 2025 (Expected)</span>
@@ -194,36 +376,125 @@
             </div>
         </div>
 
-        <h2>University Projects</h2>
+    </section>
+
+    <section class="cv-section" id="university-projects">
+        <h2><img src="icon/project.png" alt="Projects" style="width:28px;height:28px;vertical-align:middle;margin-right:8px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;"> Projects</h2>
         <ul>
             <li><strong>One-Pedal Braking System:</strong> Designed and implemented a control algorithm in Simulink, compliant with ISO 26262 standards. The model was deployed on an Arduino Uno board, demonstrating integration between model-based design and embedded prototyping.</li>
             <li><strong>Task Scheduling on OSEK/VDX:</strong> Simulated real-time task execution on an OSEK/VDX-compliant operating system, gaining hands-on experience with embedded architectures, inter-task communication, and hardware abstraction layers. <a href="https://github.com/giuliodm11/University_project_OSES.git" target="_blank">[GitHub Repo]</a></li>
         </ul>
+    </section>
 
-        <h2>Education</h2>
+    <section class="cv-section" id="education">
+        <h2><img src="icon/education.png" alt="Education" style="width:28px;height:28px;vertical-align:middle;margin-right:8px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;"> Education</h2>
         <ul>
             <li><strong>2023–Expected 2025:</strong> M.Sc. in Mechatronic Engineering, Politecnico di Torino</li>
             <li><strong>2019–2023:</strong> B.Sc. in Mechanical Engineering, Politecnico di Torino</li>
             <li><strong>2019:</strong> Scientific High School Diploma</li>
         </ul>
+    </section>
 
-        <h2>Technical Skills</h2>
+    <section class="cv-section" id="technical-skills">
+        <h2><img src="icon/competenze.png" alt="Skills" style="width:28px;height:28px;vertical-align:middle;margin-right:8px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;"> Skills</h2>
         <ul>
             <li><strong>Simulation & Control:</strong> CARLA, ROS 2, Simulink, MATLAB, VI-CarRealTime</li>
             <li><strong>Programming:</strong> Python, C/C++ (basic), Linux, LTspice</li>
             <li><strong>Other Tools and Software:</strong> Fusion 360, AutoCAD, RoadRunner, CARLA Simulator, MS Office 365, Git, Unity/UnrealEngine</li>
         </ul>
+    </section>
 
-        <h2>Languages</h2>
+    <section class="cv-section" id="languages">
+        <h2><img src="icon/languages.png" alt="Languages" style="width:28px;height:28px;vertical-align:middle;margin-right:8px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;"> Languages</h2>
         <ul>
             <li><strong>Italian:</strong> Native proficiency</li>
             <li><strong>English:</strong> IELTS 6.0 (Professional working proficiency)</li>
         </ul>
     </section>
 
+    <section class="wingfinder" id="soft-skills">
+        <div class="wingfinder-inner">
+            <div class="wingfinder-header">
+                <!-- <div class="wingfinder-icon" aria-hidden="true">
+                    <svg viewBox="0 0 32 32"><path d="M16 3c-.6 0-1.2.28-1.58.78L4.42 18.07A2 2 0 0 0 4 19.29V27a2 2 0 0 0 2 2h4.8a2 2 0 0 0 1.6-.78l3.6-4.5 3.6 4.5a2 2 0 0 0 1.6.78H26a2 2 0 0 0 2-2v-7.71c0-.44-.14-.87-.42-1.22L17.58 3.78A2 2 0 0 0 16 3zm0 3.94 8 10.55V26h-3.99l-4.01-5.01L12 26H8v-8.51l8-10.55z"/></svg>
+                </div> -->
+                    <div>
+                        <h2><img src="icon/soft_skill.png" alt="Soft Skills" style="width:28px;height:28px;vertical-align:middle;margin-right:8px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;"> Soft Skills</h2>
+                    <ul>
+                        <li><h4>Wingfinder Results</h4></li>
+                        <div class="wingfinder-badges" aria-label="Soft skills">
+                            <span>Problem Solving</span>
+                            <span>Learning Agility</span>
+                            <span>Analytical Focus</span>
+                            <span>Team Collaboration</span>
+                            <span>Drive</span>
+                        </div>
+                        <div class="wingfinder-cta">
+                            <a class="button" href="https://www.wingfinder.com/result/share/PlSj-L8ZsepsU4FufimHj?lang=it" target="_blank" rel="noopener">Wingfinder</a>
+                        </div>
+                        <div class="wingfinder-note"></div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
+    </section>
+
     <footer>
         © 2025 Giulio Di Martino - Tutti i diritti riservati
     </footer>
 
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = [
+        'profile',
+        'experience',
+        'university-projects',
+        'education',
+        'technical-skills',
+        'languages',
+        'soft-skills'
+    ];
+    const navLinks = sections.map(id => document.getElementById('nav-' + id));
+
+    // Evidenzia la voce attiva durante lo scroll
+    function onScroll() {
+        let current = sections[0];
+        for (const id of sections) {
+            const section = document.getElementById(id);
+            if (section) {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 120 && rect.bottom > 120) {
+                    current = id;
+                    break;
+                }
+            }
+        }
+        navLinks.forEach(link => link.classList.remove('active'));
+        const activeLink = document.getElementById('nav-' + current);
+        if (activeLink) activeLink.classList.add('active');
+    }
+
+    // Evidenzia la voce selezionata al click e scrolla alla sezione
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').replace('#', '');
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 60,
+                    behavior: 'smooth'
+                });
+            }
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
+
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+});
+</script>
 </body>
 </html>
