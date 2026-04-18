@@ -67,6 +67,23 @@
             margin-top: 0;
         }
         .header-inner { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+        .header-inner { position: relative; }
+
+        .button.top-contact {
+            position: absolute;
+            top: -60px;
+            right: 24px;
+            background: #ffffff !important;
+            color: var(--primary) !important;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 18px rgba(2,6,23,0.14);
+        }
+
+        .button.top-contact:hover {
+            background: #ffffff !important;
+            color: var(--primary-700) !important;
+            transform: translateY(-2px);
+        }
 
         header h1 {
             margin: 0;
@@ -300,6 +317,9 @@
         @media (max-width: 640px) {
             header h1 { font-size: 2.1em; }
             .cv-timeline { padding: 22px 16px; border-radius: 14px; }
+            .top-contact {
+                position: static;
+            }
         }
         /* Wingfinder custom section */
         .wingfinder {
@@ -464,6 +484,10 @@
 
     <header>
         <div class="header-inner">
+        <a class="button top-contact" href="https://mail.google.com/mail/?view=cm&fs=1&to=g.dimartino09@gmail.com" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 1.99 2H20c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5L4 8V6l8 5 8-5v2z"/></svg>
+            Contact
+        </a>
         <h1>Giulio Di Martino</h1>
         <p>Personal portfolio and online resume</p>
         <div class="buttons">
