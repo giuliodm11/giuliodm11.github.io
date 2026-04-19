@@ -6,21 +6,25 @@
     <title>Courses and Certifications</title>
     <style>
         :root {
-            --bg: #f6f7fb;
-            --surface: #ffffff;
-            --text: #111827;
-            --muted: #6b7280;
-            --border: #e5e7eb;
-            --primary: #2563eb;
-            --primary-700: #1d4ed8;
+            --bg: #07080c;
+            --bg-2: #0e1117;
+            --surface: rgba(15, 18, 24, 0.92);
+            --text: #f5f7fa;
+            --muted: #b1bac8;
+            --border: rgba(255, 255, 255, 0.10);
+            --primary: #e10600;
+            --primary-700: #a60500;
         }
 
         * { box-sizing: border-box; }
 
         body {
             margin: 0;
-            font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-            background: radial-gradient(900px 420px at 50% -120px, rgba(37,99,235,0.12), transparent 60%), var(--bg);
+            font-family: Aptos, "Segoe UI", sans-serif;
+            background:
+                linear-gradient(135deg, rgba(225, 6, 0, 0.16), transparent 36%),
+                radial-gradient(900px 420px at 18% 12%, rgba(255,255,255,0.10), transparent 58%),
+                linear-gradient(180deg, var(--bg), var(--bg-2));
             color: var(--text);
             line-height: 1.6;
         }
@@ -34,15 +38,18 @@
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: 18px;
             padding: 24px;
-            box-shadow: 0 8px 24px rgba(2,6,23,0.06);
+            box-shadow: 0 18px 44px rgba(0,0,0,0.28);
+            backdrop-filter: blur(10px);
         }
 
         h1 {
             margin: 0 0 8px;
-            font-size: 2rem;
-            letter-spacing: -0.02em;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-family: "Bahnschrift", "Arial Narrow", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
         }
 
         p {
@@ -58,7 +65,7 @@
         li { margin: 10px 0; }
 
         a {
-            color: var(--primary-700);
+            color: #ffd6d4;
             text-decoration: none;
             font-weight: 600;
         }
@@ -99,7 +106,7 @@
             color: var(--primary);
             text-decoration: none;
             font-weight: 700;
-            box-shadow: 0 8px 18px rgba(2,6,23,0.14);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.26);
             transform: none !important;
             transition: box-shadow .2s ease, background .2s ease;
         }

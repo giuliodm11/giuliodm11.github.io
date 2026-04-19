@@ -6,27 +6,16 @@
     <title>Giulio Di Martino - Portfolio</title>
     <style>
         :root {
-            --bg: #f6f7fb;
-            --surface: #ffffff;
-            --text: #111827;
-            --muted: #6b7280;
-            --border: #e5e7eb;
-            --primary: #2563eb; /* blue-600 */
-            --primary-700: #1d4ed8;
-            --ring: rgba(37,99,235,0.25);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #0b1220;
-                --surface: #0f172a;
-                --text: #e5e7eb;
-                --muted: #94a3b8;
-                --border: #1f2a44;
-                --primary: #3b82f6; /* blue-500 */
-                --primary-700: #2563eb;
-                --ring: rgba(59,130,246,0.35);
-            }
+            --bg: #07080c;
+            --bg-2: #0e1117;
+            --surface: rgba(15, 18, 24, 0.92);
+            --surface-strong: #11151c;
+            --text: #f5f7fa;
+            --muted: #b1bac8;
+            --border: rgba(255, 255, 255, 0.10);
+            --primary: #e10600;
+            --primary-700: #a60500;
+            --ring: rgba(225, 6, 0, 0.32);
         }
 
         * { box-sizing: border-box; }
@@ -38,22 +27,26 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-            background: radial-gradient(1000px 500px at 50% -100px, rgba(37,99,235,0.08), transparent 60%), var(--bg);
+            font-family: Aptos, "Segoe UI", sans-serif;
+            background:
+                linear-gradient(135deg, rgba(225, 6, 0, 0.16), transparent 36%),
+                radial-gradient(900px 520px at 18% 12%, rgba(255,255,255,0.10), transparent 58%),
+                radial-gradient(700px 420px at 82% 18%, rgba(225,6,0,0.18), transparent 54%),
+                linear-gradient(180deg, var(--bg), var(--bg-2));
             color: var(--text);
             text-align: center;
             line-height: 1.6;
             overflow-y: auto;
             scrollbar-width: thin;
-            scrollbar-color: var(--primary) rgba(148,163,184,0.24);
+            scrollbar-color: var(--primary) rgba(255,255,255,0.16);
         }
 
         body::-webkit-scrollbar { width: 12px; }
-        body::-webkit-scrollbar-track { background: rgba(148,163,184,0.18); }
+        body::-webkit-scrollbar-track { background: rgba(255,255,255,0.10); }
         body::-webkit-scrollbar-thumb {
             background: linear-gradient(var(--primary), var(--primary-700));
             border-radius: 999px;
-            border: 2px solid rgba(255,255,255,0.5);
+            border: 2px solid rgba(7,8,12,0.85);
         }
         body::-webkit-scrollbar-thumb:hover { background: var(--primary-700); }
 
@@ -61,22 +54,96 @@
 
         header {
             color: var(--text);
-            padding: 72px 0 48px 0;
-            background: linear-gradient(180deg, rgba(37,99,235,0.08), rgba(37,99,235,0.0));
+            padding: 84px 0 54px 0;
+            background:
+                linear-gradient(135deg, rgba(225,6,0,0.18), rgba(225,6,0,0.02) 42%, transparent 58%),
+                linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.0)),
+                rgba(10, 12, 16, 0.88);
             border-bottom: 1px solid var(--border);
             margin-top: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(120deg, rgba(255,255,255,0.05) 0 14px, transparent 14px 28px),
+                linear-gradient(0deg, transparent 0 96%, rgba(255,255,255,0.08) 96% 100%);
+            background-size: 120px 120px, 100% 100%;
+            opacity: 0.16;
+            pointer-events: none;
         }
         .header-inner { max-width: 960px; margin: 0 auto; padding: 0 24px; }
-        .header-inner { position: relative; }
+        .header-inner { position: relative; z-index: 1; }
+        .hero-layout {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 34px;
+            margin-top: 8px;
+            text-align: left;
+        }
+        .hero-portrait {
+            width: min(120px, 20vw);
+            margin: 0;
+            padding: 4px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.10);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.28);
+            backdrop-filter: blur(10px);
+            flex-shrink: 0;
+        }
+        .hero-portrait img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+        .hero-copy {
+            flex: 1;
+            min-width: 0;
+        }
+        .hero-meta {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 0 auto 18px;
+        }
+        .hero-meta span {
+            padding: 7px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.05);
+            color: var(--muted);
+            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            backdrop-filter: blur(8px);
+        }
+        .hero-detail {
+            margin-top: 24px;
+            color: var(--muted);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+        }
+        .hero-detail span {
+            color: #ffffff;
+            font-weight: 700;
+        }
 
         .button.top-contact {
             position: absolute;
             top: -60px;
             right: 24px;
-            background: #ffffff !important;
+            background: rgba(255,255,255,0.96) !important;
             color: var(--primary) !important;
-            border: 1px solid var(--border);
-            box-shadow: 0 8px 18px rgba(2,6,23,0.14);
+            border: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.32);
         }
 
         .button.top-contact:hover {
@@ -87,24 +154,31 @@
 
         header h1 {
             margin: 0;
-            font-size: 2.8em;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, var(--text), var(--primary));
+            font-size: clamp(2.6rem, 4vw, 4.3rem);
+            font-family: "Bahnschrift", "Arial Narrow", sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ffffff 0%, #d9dde5 44%, #ff5f57 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
         header p {
-            font-size: 1.15em;
-            margin-top: 12px;
+            font-size: 1.08em;
+            margin-top: 14px;
             color: var(--muted);
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
+            letter-spacing: 0.03em;
         }
 
         .buttons {
             margin-top: 24px;
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: flex-start;
             gap: 14px;
         }
         .button {
@@ -112,18 +186,29 @@
             align-items: center;
             gap: 10px;
             padding: 12px 18px;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-700));
             color: #fff;
             text-decoration: none;
             border-radius: 999px;
             font-size: 1rem;
             font-weight: 600;
             letter-spacing: 0.01em;
-            box-shadow: 0 8px 20px rgba(37,99,235,0.18), 0 1px 0 rgba(0,0,0,0.06) inset;
-            transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-            border: 1px solid transparent;
+            box-shadow: 0 10px 22px rgba(225,6,0,0.22), 0 1px 0 rgba(255,255,255,0.08) inset;
+            transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+            border: 1px solid rgba(255,255,255,0.08);
+            position: relative;
+            overflow: hidden;
         }
-        .button:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(37,99,235,0.24); background: var(--primary-700); }
+        .button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.18) 50%, transparent 80%);
+            transform: translateX(-120%);
+            transition: transform .45s ease;
+        }
+        .button:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(225,6,0,0.28); background: linear-gradient(135deg, #ff1c13, var(--primary-700)); }
+        .button:hover::after { transform: translateX(120%); }
         .button:focus-visible { outline: none; box-shadow: 0 0 0 6px var(--ring); }
         .button svg { width: 20px; height: 20px; fill: currentColor; }
 
@@ -134,9 +219,10 @@
             text-align: left;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            box-shadow: 0 6px 24px rgba(2,6,23,0.06);
+            border-radius: 18px;
+            box-shadow: 0 18px 44px rgba(0,0,0,0.28);
             padding: 28px 22px;
+            backdrop-filter: blur(10px);
         }
         .cv-timeline h2 {
             color: var(--text);
@@ -155,9 +241,10 @@
             text-align: left;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            box-shadow: 0 6px 24px rgba(2,6,23,0.06);
+            border-radius: 18px;
+            box-shadow: 0 18px 44px rgba(0,0,0,0.28);
             padding: 26px 22px 26px 22px;
+            backdrop-filter: blur(10px);
         }
         .cv-section h2 {
             margin: 0 0 14px 0;
@@ -235,13 +322,13 @@
             background: linear-gradient(135deg, var(--primary), var(--primary-700));
             border-radius: 50%;
             border: 2px solid var(--surface);
-            box-shadow: 0 0 0 2px rgba(37,99,235,0.22), 0 3px 8px rgba(37,99,235,0.28);
+            box-shadow: 0 0 0 2px rgba(225,6,0,0.22), 0 3px 8px rgba(225,6,0,0.28);
             transition: transform .3s ease, box-shadow .3s ease;
             z-index: 2;
         }
         .timeline-item:hover::before {
             transform: translateX(-50%) scale(1.08);
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.28), 0 5px 14px rgba(37,99,235,0.34);
+            box-shadow: 0 0 0 3px rgba(225,6,0,0.28), 0 5px 14px rgba(225,6,0,0.34);
         }
         #education .timeline {
             margin-top: 14px;
@@ -320,17 +407,31 @@
             .top-contact {
                 position: static;
             }
+            .hero-portrait {
+                width: min(100px, 30vw);
+            }
+            .hero-layout {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-copy {
+                width: 100%;
+            }
+            .hero-meta,
+            .buttons {
+                justify-content: center;
+            }
         }
         /* Wingfinder custom section */
         .wingfinder {
             max-width: 960px;
             margin: 42px auto 0 auto;
             padding: 0;
-            background: radial-gradient(600px 400px at 85% 20%, rgba(37,99,235,0.15), transparent 60%),
-                        linear-gradient(135deg, var(--surface) 0%, var(--surface) 40%, rgba(37,99,235,0.05) 100%);
+            background: radial-gradient(600px 400px at 85% 20%, rgba(225,6,0,0.16), transparent 60%),
+                        linear-gradient(135deg, rgba(16,20,27,0.96) 0%, rgba(16,20,27,0.96) 40%, rgba(225,6,0,0.08) 100%);
             border: 1px solid var(--border);
             border-radius: 20px;
-            box-shadow: 0 8px 30px -4px rgba(2,6,23,0.12), 0 2px 6px rgba(2,6,23,0.08);
+            box-shadow: 0 18px 44px rgba(0,0,0,0.3);
             overflow: hidden;
         }
         .wingfinder-inner { padding: 32px 28px 30px 28px; text-align: left; }
@@ -340,35 +441,35 @@
             background: linear-gradient(135deg, var(--primary), var(--primary-700));
             border-radius: 16px;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 6px 16px rgba(37,99,235,0.35);
+            box-shadow: 0 6px 16px rgba(225,6,0,0.35);
             position: relative;
         }
         .wingfinder-icon svg { width: 34px; height: 34px; fill: #fff; }
         .wingfinder h2 {
             margin: 0 0 6px 0; font-size: 1.35em; letter-spacing: -0.5px;
-            background: linear-gradient(120deg, var(--text), var(--primary));
+            background: linear-gradient(120deg, var(--text), #ff7b74);
             -webkit-background-clip: text; background-clip: text; color: transparent;
         }
         .wingfinder-lead { color: var(--muted); margin: 4px 0 22px 0; max-width: 760px; line-height: 1.5; }
         .wingfinder-badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 26px 0; }
         .wingfinder-badges span {
-            background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(37,99,235,0.25));
-            color: var(--primary-700);
+            background: linear-gradient(135deg, rgba(225,6,0,0.10), rgba(255,255,255,0.08));
+            color: #ffd6d4;
             padding: 6px 14px; font-size: 0.78rem; font-weight: 600; letter-spacing: .5px;
             border-radius: 999px; position: relative; overflow: hidden;
-            border: 1px solid rgba(37,99,235,0.28);
+            border: 1px solid rgba(225,6,0,0.28);
         }
-        .wingfinder-badges span::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent 70%); opacity: .55; }
+        .wingfinder-badges span::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.24), transparent 70%); opacity: .55; }
         .wingfinder-cta { display: flex; justify-content: flex-start; }
-        .wingfinder-cta .button { box-shadow: 0 10px 28px rgba(37,99,235,0.32); }
-        .wingfinder-cta .button:hover { box-shadow: 0 14px 34px rgba(37,99,235,0.38); }
+        .wingfinder-cta .button { box-shadow: 0 10px 28px rgba(225,6,0,0.32); }
+        .wingfinder-cta .button:hover { box-shadow: 0 14px 34px rgba(225,6,0,0.38); }
         nav.sidebar-index {
             position: fixed;
             top: 0;
             left: 0;
             bottom: 0;
             width: 180px;
-            background: var(--surface);
+            background: rgba(8, 10, 14, 0.96);
             z-index: 100;
             display: flex;
             flex-direction: column;
@@ -379,6 +480,8 @@
             scrollbar-width: none;
             transform: translateX(0);
             transition: transform .3s ease, box-shadow .3s ease;
+            border-right: 1px solid var(--border);
+            box-shadow: 10px 0 30px rgba(0,0,0,0.26);
         }
         nav.sidebar-index.hidden {
             transform: translateX(-100%);
@@ -398,7 +501,7 @@
             justify-content: center;
             cursor: pointer;
             z-index: 120;
-            box-shadow: 0 8px 18px rgba(2,6,23,0.14);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.26);
             transition: background .2s ease, transform .2s ease;
             backdrop-filter: blur(6px);
         }
@@ -426,7 +529,7 @@
             align-items: center;
             gap: 10px;
             text-decoration: none;
-            color: var(--muted);
+            color: #c4cbd7;
             font-weight: 500;
             padding: 8px 18px;
             border-radius: 8px;
@@ -434,8 +537,8 @@
             position: relative;
         }
         nav.sidebar-index a:hover {
-            background: rgba(37,99,235,0.10);
-            color: var(--text);
+            background: rgba(225,6,0,0.12);
+            color: #ffffff;
             transform: translateX(3px);
         }
         nav.sidebar-index a.active {
@@ -451,7 +554,7 @@
             bottom: 8px;
             width: 4px;
             border-radius: 999px;
-            background: linear-gradient(#93c5fd, #dbeafe);
+            background: linear-gradient(#ffffff, #ffd0ce);
         }
         nav.sidebar-index svg {
             flex-shrink: 0;
@@ -460,7 +563,7 @@
         @media (max-width: 800px) {
             nav.sidebar-index {
                 width: 240px;
-                box-shadow: 4px 0 16px rgba(37,99,235,0.15);
+                box-shadow: 4px 0 16px rgba(0,0,0,0.3);
             }
             body {
                 margin-left: 0;
@@ -478,6 +581,13 @@
             margin-left: 0;
             transition: margin-left .3s ease;
         }
+        .card-accent {
+            height: 4px;
+            width: 96px;
+            border-radius: 999px;
+            margin-bottom: 18px;
+            background: linear-gradient(90deg, var(--primary), rgba(255,255,255,0.82));
+        }
     </style>
 </head>
 <body>
@@ -488,21 +598,35 @@
             <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 1.99 2H20c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5L4 8V6l8 5 8-5v2z"/></svg>
             Contact
         </a>
-        <h1>Giulio Di Martino</h1>
-        <p>Personal portfolio and online resume</p>
-        <div class="buttons">
-            <a class="button" href="https://www.linkedin.com/in/giulio-di-martino-567a86225?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BwtJX0gq%2FQcS09V8jo4ecLA%3D%3D" target="_blank">
-                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 10.268h-3v-4.5c0-1.107-.893-2-2-2s-2 .893-2 2v4.5h-3v-9h3v1.285c.542-.839 1.564-1.285 2.5-1.285 1.933 0 3.5 1.567 3.5 3.5v5.5z"/></svg>
-                LinkedIn
-            </a>
-            <a class="button" href="https://github.com/giuliodm11" target="_blank">
-                <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.119 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.43.371.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.218.694.825.576 4.765-1.585 8.199-6.082 8.199-11.385 0-6.627-5.373-12-12-12z"/></svg>
-                GitHub
-            </a>
-            <a class="button" href="CV_Di_Martino_Giulio.pdf" target="_blank">
-                <svg viewBox="0 0 24 24"><path d="M6 2c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-12l-6-6h-8zm7 1.5v4.5h4.5l-4.5-4.5zm-7 16.5v-16h7v6h6v10h-13z"/></svg>
-                Scarica CV
-            </a>
+        <div class="hero-layout">
+            <div class="hero-portrait">
+                <img src="image.png" alt="Giulio Di Martino portrait graphic">
+            </div>
+            <div class="hero-copy">
+                <h1>Giulio Di Martino</h1>
+                <p>Mechanical engineer focused on simulation, validation, control and data-driven development for intelligent mobility and ADAS.</p>
+                <div class="hero-meta">
+                    <span>ADAS Validation</span>
+                    <span>Digital Twins</span>
+                    <span>Vehicle Dynamics</span>
+                    <span>Control Systems</span>
+                </div>
+                <div class="hero-detail">Target role: <span>F1 / Motorsport Engineering</span></div>
+                <div class="buttons">
+                    <a class="button" href="https://www.linkedin.com/in/giulio-di-martino-567a86225?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BwtJX0gq%2FQcS09V8jo4ecLA%3D%3D" target="_blank">
+                        <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 10.268h-3v-4.5c0-1.107-.893-2-2-2s-2 .893-2 2v4.5h-3v-9h3v1.285c.542-.839 1.564-1.285 2.5-1.285 1.933 0 3.5 1.567 3.5 3.5v5.5z"/></svg>
+                        LinkedIn
+                    </a>
+                    <a class="button" href="https://github.com/giuliodm11" target="_blank">
+                        <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.119 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.43.371.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.218.694.825.576 4.765-1.585 8.199-6.082 8.199-11.385 0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                    <a class="button" href="CV_Di_Martino_Giulio.pdf" target="_blank">
+                        <svg viewBox="0 0 24 24"><path d="M6 2c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-12l-6-6h-8zm7 1.5v4.5h4.5l-4.5-4.5zm-7 16.5v-16h7v6h6v10h-13z"/></svg>
+                        Scarica CV
+                    </a>
+                </div>
+            </div>
         </div>
         </div>
     </header>
@@ -526,11 +650,13 @@
 
     <main>
     <section class="cv-section reveal" id="profile">
+        <div class="card-accent"></div>
         <h2><img src="icon/profile.png" alt="Profile" style="width:28px;height:28px;vertical-align:middle;margin-right:8px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;"> Profile</h2>
         <p>Mechanical Engineer specialized in Mechatronics, with hands-on experience in simulation-based testing for ADAS and autonomous systems. Currently completing an M.Sc. in Mechatronic Engineering at Politecnico di Torino, with thesis work focused on Digital Twins for ADAS validation using CARLA, ROS 2, Simulink, and VI-CarRealTime. Skilled in integrating vehicle dynamics, control logic, and simulation workflows to support robust and repeatable testing. Interested in roles in control engineering, intelligent mobility, and automated driving systems.</p>
     </section>
 
     <section class="cv-timeline reveal" id="experience">
+        <div class="card-accent"></div>
         <h2><img src="icon/experience.png" alt="Experience" style="width:28px;height:28px;vertical-align:middle;margin-right:8px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;"> Experience</h2>
         <div class="timeline">
             <div class="timeline-item">
@@ -579,6 +705,7 @@
     </section>
 
     <section class="cv-section reveal" id="university-projects">
+        <div class="card-accent"></div>
         <h2><img src="icon/project.png" alt="Projects" style="width:28px;height:28px;vertical-align:middle;margin-right:8px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;"> Projects</h2>
         <ul>
             <li><strong>One-Pedal Braking System:</strong> Designed and implemented a control algorithm in Simulink, compliant with ISO 26262 standards. The model was deployed on an Arduino Uno board, demonstrating integration between model-based design and embedded prototyping.</li>
@@ -588,6 +715,7 @@
     </section>
 
     <section class="cv-section reveal" id="education">
+        <div class="card-accent"></div>
         <h2><img src="icon/education.png" alt="Education" style="width:28px;height:28px;vertical-align:middle;margin-right:8px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;"> Education</h2>
         <div class="timeline">
             <div class="timeline-item">
@@ -608,6 +736,7 @@
     </section>
 
     <section class="cv-section reveal" id="technical-skills">
+        <div class="card-accent"></div>
         <h2><img src="icon/competenze.png" alt="Skills" style="width:28px;height:28px;vertical-align:middle;margin-right:8px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;"> Skills</h2>
         <ul>
             <li><strong>Simulation & Control:</strong> CARLA, ROS 2, Simulink, MATLAB, VI-CarRealTime</li>
@@ -617,6 +746,7 @@
     </section>
 
     <section class="cv-section reveal" id="languages">
+        <div class="card-accent"></div>
         <h2><img src="icon/languages.png" alt="Languages" style="width:28px;height:28px;vertical-align:middle;margin-right:8px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;"> Languages</h2>
         <ul>
             <li><strong>Italian:</strong> Native proficiency</li>
@@ -625,6 +755,7 @@
     </section>
 
     <section class="cv-section reveal" id="soft-skills">
+        <div class="card-accent"></div>
         <h2><img src="icon/soft_skill.png" alt="Soft Skills" style="width:28px;height:28px;vertical-align:middle;margin-right:8px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;"> Soft Skills</h2>
         <ul>
             <li><strong>Problem Solving:</strong> structured approach to solving complex technical challenges.</li>
@@ -636,6 +767,7 @@
     </section>
 
     <section class="cv-section reveal" id="corsi">
+        <div class="card-accent"></div>
         <h2><img src="icon/education.png" alt="Courses" style="width:28px;height:28px;vertical-align:middle;margin-right:8px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;"> Certifications and Courses</h2>
         <p>Open the complete archive with all reports and certificates.</p>
         <div class="single-course-btn">
